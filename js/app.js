@@ -32,7 +32,8 @@ const appData = {
   savings: false,
   isDisabledBtn: true,
   budgetOfTheDay: function () {
-    this.budgetOnTheDay = (this.budgetOnTheMonth - this.sumExpenses) / this.dayOfMonth.toFixed();
+    this.budgetOnTheDay =
+      (this.budgetOnTheMonth - this.sumExpenses) / this.dayOfMonth.toFixed();
     dayBudgetValue.textContent = this.budgetOnTheDay;
     this.detectLevel();
   },
@@ -44,7 +45,7 @@ const appData = {
     } else if (this.budgetOnTheDay < 10000) {
       levelValue.textContent = "Высокий достаток";
     } else {
-        levelValue.textContent = "Пока неизвестен достаток!"
+      levelValue.textContent = "Пока неизвестен достаток!";
     }
   },
   chooseOptExpenses: function (item) {
@@ -68,7 +69,7 @@ const appData = {
         secondQuestion != "" &&
         firstQuestion.length < 50
       ) {
-        appData.expenses[firstQuestion] = secondQuestion;
+        this.expenses[firstQuestion] = secondQuestion;
         this.sumExpenses += +secondQuestion;
       } else {
         i = i - 1;
@@ -102,21 +103,25 @@ const appData = {
   },
   chooseIncome: function () {
     let item = chooseIncomeInput.value;
-    appData.income = item.split(",");
+    this.income = item.split(",");
     incomeValue.textContent = appData.income;
   },
   savingCond: function () {
-    appData.savings === true
-      ? (appData.savings = false)
-      : (appData.savings = true);
+    this.savings === true
+      ? (this.savings = false)
+      : (this.savings = true);
   },
 };
 
 startCalculation.addEventListener("click", function () {
-  let disabledBtn = ['.expenses-item-btn', '.optionalexpenses-btn', '.count-budget-btn'];
+  let disabledBtn = [
+    ".expenses-item-btn",
+    ".optionalexpenses-btn",
+    ".count-budget-btn",
+  ];
 
-  for(let elem of disabledBtn) {
-      document.querySelector(elem).removeAttribute('disabled');
+  for (let elem of disabledBtn) {
+    document.querySelector(elem).removeAttribute("disabled");
   }
 
   periodMoney = prompt("Введите дату в формате YYYY-MM-DD");
